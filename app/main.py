@@ -21,7 +21,7 @@ def main():
             if command in valid_commands:
                 print(f"{command} is a shell builtin")
             else:
-                print(f"{user_input[5:]}: command not found")
+                print(f"{user_input[5:]}: not found")
         else:
             print(f"{user_input}: command not found")
 
