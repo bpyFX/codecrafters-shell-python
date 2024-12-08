@@ -45,7 +45,7 @@ def main():
                             found = True
                             break
                     if not found:
-                        print(f"{search_command}: command not found")
+                        print(f"{search_command}: not found")
             else:
                 print("Usage: type <command>")
         else:
