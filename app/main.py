@@ -58,7 +58,7 @@ def main():
                 print(f"{command}: command not found")
 
         # Print the prompt after each command execution
-        sys.stdout.write("$ ")
+        sys.stdout.write("$")
         sys.stdout.flush()
 
 if __name__ == "__main__":
