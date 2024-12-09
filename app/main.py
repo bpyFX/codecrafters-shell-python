@@ -8,6 +8,7 @@ def main():
     while True:
         # Prompt for user input
         sys.stdout.write("$ ")
+        sys.stdout.flush()
         user_input = input().strip()
 
         # Split the input into command and arguments
@@ -32,7 +33,6 @@ def main():
                     found = False
                     for dir in path_dirs:
                         executable_path = os.path.join(dir, search_command)
-                        #print(f"Checking: {executable_path}")
                         if os.path.isfile(executable_path) and os.access(executable_path, os.X_OK):
                             print(f"{search_command} is {executable_path}")
                             found = True
@@ -47,9 +47,7 @@ def main():
             found = False
             for dir in path_dirs:
                 executable_path = os.path.join(dir, command)
-                #print(f"Checking: {executable_path}")
                 if os.path.isfile(executable_path) and os.access(executable_path, os.X_OK):
-                    #print(f"Executing: {executable_path} with args: {args}")
                     try:
                         os.execv(executable_path, [executable_path] + args)
                     except Exception as e:
@@ -58,6 +56,10 @@ def main():
                     break
             if not found:
                 print(f"{command}: command not found")
+
+        # Print the prompt after each command execution
+        sys.stdout.write("$ ")
+        sys.stdout.flush()
 
 if __name__ == "__main__":
     main()
