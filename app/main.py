@@ -4,12 +4,10 @@ import subprocess
 
 def main():
     path_dirs = os.getenv('PATH').split(os.pathsep)
-
     while True:
         sys.stdout.write("$ ")
         sys.stdout.flush()
         user_input = input().strip()
-
         if not user_input:
             continue
 
@@ -20,20 +18,24 @@ def main():
             sys.exit(0)
         elif command == "echo":
             print(" ".join(args))
-        elif command == "type":
-            if args:
-                if args[0] in {"echo", "type", "exit", "pwd"}:
-                    print(f"{args[0]} is a shell builtin")
+        elif command == "type" and args:
+            if args[0] in {"echo", "type", "exit", "pwd", "cd"}:
+                print(f"{args[0]} is a shell builtin")
+            else:
+                for dir in path_dirs:
+                    executable_path = os.path.join(dir, args[0])
+                    if os.path.isfile(executable_path) and os.access(executable_path, os.X_OK):
+                        print(f"{args[0]} is {executable_path}")
+                        break
                 else:
-                    for dir in path_dirs:
-                        executable_path = os.path.join(dir, args[0])
-                        if os.path.isfile(executable_path) and os.access(executable_path, os.X_OK):
-                            print(f"{args[0]} is {executable_path}")
-                            break
-                    else:
-                        print(f"{args[0]}: not found")
+                    print(f"{args[0]}: not found")
         elif command == "pwd":
             print(os.getcwd())
+        elif command == "cd" and args:
+            try:
+                os.chdir(args[0])
+            except FileNotFoundError:
+                print(f"cd: {args[0]}: No such file or directory")
         else:
             for dir in path_dirs:
                 executable_path = os.path.join(dir, command)
