@@ -26,13 +26,13 @@ def main():
         elif command == "type":
             if args:
                 search_command = args[0]
-                if search_command in {"echo", "type", "exit"}:
+                if search_command in {"echo", "type", "exit", "pwd"}:
                     print(f"{search_command} is a shell builtin")
                 else:
                     found = False
                     for dir in path_dirs:
                         executable_path = os.path.join(dir, search_command)
-                        print(f"Checking: {executable_path}")
+                        #print(f"Checking: {executable_path}")
                         if os.path.isfile(executable_path) and os.access(executable_path, os.X_OK):
                             print(f"{search_command} is {executable_path}")
                             found = True
@@ -47,9 +47,9 @@ def main():
             found = False
             for dir in path_dirs:
                 executable_path = os.path.join(dir, command)
-                print(f"Checking: {executable_path}")
+                #print(f"Checking: {executable_path}")
                 if os.path.isfile(executable_path) and os.access(executable_path, os.X_OK):
-                    print(f"Executing: {executable_path} with args: {args}")
+                    #print(f"Executing: {executable_path} with args: {args}")
                     try:
                         os.execv(executable_path, [executable_path] + args)
                     except Exception as e:
