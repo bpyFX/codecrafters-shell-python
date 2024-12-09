@@ -1,32 +1,24 @@
 import sys
 import os
-from sys import executable
-
 
 def main():
-
     # Get the current PATH environment variable set during execution
     path_dirs = os.getenv('PATH').split(os.pathsep)
 
-    #Used for type commands that are builtin
-    valid_commands = ["echo", "type", "exit"]
-
     while True:
-        # Uncomment this block to pass the first stage
+        # Prompt for user input
         sys.stdout.write("$ ")
-        # Wait for user input
-        user_input = input()
+        user_input = input().strip()
 
         # Split the input into command and arguments
         parts = user_input.split()
         if not parts:
             continue
 
-
         command = parts[0]
-        args = parts [1:]
+        args = parts[1:]
 
-        #loop
+        # Loop to handle different commands
         if user_input == "exit 0":
             sys.exit(0)
         elif command == "echo":
@@ -34,26 +26,34 @@ def main():
         elif command == "type":
             if args:
                 search_command = args[0]
-                if search_command in valid_commands:
+                if search_command in {"echo", "type", "exit"}:
                     print(f"{search_command} is a shell builtin")
                 else:
                     found = False
                     for dir in path_dirs:
-                        executable = os.path.join(dir, search_command)
-                        if os.path.isfile(executable) and os.access(executable, os.X_OK):
-                            print(f"{search_command} is {executable}")
+                        executable_path = os.path.join(dir, search_command)
+                        print(f"Checking: {executable_path}")
+                        if os.path.isfile(executable_path) and os.access(executable_path, os.X_OK):
+                            print(f"{search_command} is {executable_path}")
                             found = True
                             break
                     if not found:
                         print(f"{search_command}: not found")
             else:
                 print("Usage: type <command>")
+        elif command == "pwd":
+            print(os.getcwd())
         else:
             found = False
             for dir in path_dirs:
-                executable = os.path.join(dir, command)
-                if os.path.isfile(executable) and os.access(executable, os.X_OK):
-                    os.system(user_input)
+                executable_path = os.path.join(dir, command)
+                print(f"Checking: {executable_path}")
+                if os.path.isfile(executable_path) and os.access(executable_path, os.X_OK):
+                    print(f"Executing: {executable_path} with args: {args}")
+                    try:
+                        os.execv(executable_path, [executable_path] + args)
+                    except Exception as e:
+                        print(f"Error executing {executable_path}: {e}")
                     found = True
                     break
             if not found:
