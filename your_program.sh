@@ -12,5 +12,6 @@ set -e # Exit early if any commands fail
 #
 # - Edit this to change how your program runs locally
 # - Edit .codecrafters/run.sh to change how your program runs remotely
+# Execute the Python entry point with pipenv, forwarding any arguments
 exec pipenv run python3 -u -m app.main "$@"
 
