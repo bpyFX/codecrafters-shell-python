@@ -1,17 +1,12 @@
 #!/bin/sh
-#
-# Use this script to run your program LOCALLY.
-#
-# Note: Changing this script WILL NOT affect how CodeCrafters runs your program.
-#
-# Learn more: https://codecrafters.io/program-interface
 
-set -e # Exit early if any commands fail
+# Use this script to run the shell locally.
+# Note: Changing this script WILL NOT affect how Codecrafters runs your program.
+
+set -e  # Exit early if any commands fail
 
 # Copied from .codecrafters/run.sh
-#
-# - Edit this to change how your program runs locally
-# - Edit .codecrafters/run.sh to change how your program runs remotely
-# Execute the Python entry point with pipenv, forwarding any arguments
-exec pipenv run python3 -u -m app.main "$@"
 
+# Edit this to change how your program runs locally
+# Execute the Python entry point with $@ args, forwarding any arguments
+exec python3 -u app/main.py "$@"
