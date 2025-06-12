@@ -2,6 +2,10 @@ import sys
 import os
 import subprocess
 
+def builtin_pwd(_args: list[str]) -> None:
+    """Print the current working directory."""
+    print(os.getcwd())
+
 def execute_command(command, args, path_dirs):
     if command == "echo":
         print(" ".join(args))
@@ -16,7 +20,7 @@ def execute_command(command, args, path_dirs):
                     return
             print(f"{args[0]}: not found")
     elif command == "pwd":
-        print(os.getcwd())
+        builtin_pwd(args)
     elif command == "cd" and args:
         try:
             os.chdir(args[0].replace("~", os.getenv("HOME", "")))
