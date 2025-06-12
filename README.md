@@ -1,34 +1,10 @@
-[![progress-banner](https://backend.codecrafters.io/progress/shell/3bc85fb8-79c0-429b-b60d-62629fa46d41)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+# Build Your Own Shell (Python)
 
-This is a starting point for Python solutions to the
-["Build Your Own Shell" Challenge](https://app.codecrafters.io/courses/shell/overview).
+This repository contains a basic implementation of a POSIX compatible shell in Python. It can interpret simple commands, run external programs and handle built-in commands like `cd`, `pwd` and `echo`.
 
-In this challenge, you'll build your own POSIX compliant shell that's capable of
-interpreting shell commands, running external programs and builtin commands like
-cd, pwd, echo and more. Along the way, you'll learn about shell command parsing,
-REPLs, builtin commands, and more.
+## Running locally
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+1. Ensure you have Python 3 installed.
+2. Execute `./your_program.sh` to start the shell defined in `app/main.py`.
 
-# Passing the first stage
-
-The entry point for your `shell` implementation is in `app/main.py`. Study and
-uncomment the relevant code, and push your changes to pass the first stage:
-
-```sh
-git commit -am "pass 1st stage" # any msg
-git push origin master
-```
-
-Time to move on to the next stage!
-
-# Stage 2 & beyond
-
-Note: This section is for stages 2 and beyond.
-
-1. Ensure you have `python (3.11)` installed locally
-1. Run `./your_program.sh` to run your program, which is implemented in
-   `app/main.py`.
-1. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
+Feel free to extend the implementation to learn more about shell command parsing, REPLs and implementing additional built-ins.
